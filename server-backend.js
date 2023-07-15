@@ -50,11 +50,71 @@ const server = http.createServer((req, res) => {
   // Enable CORS using the cors middleware
   cors()(req, res, () => {
     if (req.method === 'POST' && req.url === '/register') {
-      // Handle user registration
-      // ... Your existing registration logic ...
-    } else if (req.method === 'POST' && req.url === '/login/') {
-      // Handle user login
-      // ... Your existing login logic ...
+       // Handle user registration
+       let body = '';
+       req.on('data', (chunk) => {
+         body += chunk.toString();
+       });
+       req.on('end', () => {
+         const { username, email, password } = JSON.parse(body);
+ 
+         // Validate the input fields (e.g., check for required fields, proper email format, etc.)
+         // ...
+ 
+         // Insert the user data into the database
+         const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+         const values = [username, email, password];
+ 
+         pool.query(query, values, (err, result) => {
+           if (err) {
+             console.error('Error during user registration:', err);
+             res.statusCode = 500;
+             res.setHeader('Content-Type', 'application/json');
+             res.end(JSON.stringify({ error: 'An error occurred during registration' }));
+           } else {
+             res.statusCode = 200;
+             res.setHeader('Content-Type', 'application/json');
+             res.end(JSON.stringify({ message: 'User registered successfully' }));
+           }
+         });
+       });
+    } else if (req.method === 'POST' && req.url === '/login') {
+        // Handle user login
+        let body = '';
+        req.on('data', (chunk) => {
+          body += chunk.toString();
+        });
+        req.on('end', () => {
+          const { username, password } = JSON.parse(body);
+  
+          // Validate the input fields (e.g., check for required fields, proper format, etc.)
+          // ...
+  
+          // Check if the user credentials are valid
+          const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+          const values = [username, password];
+  
+          pool.query(query, values, (err, result) => {
+            if (err) {
+              console.error('Error during user login:', err);
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'An error occurred during login' }));
+            } else {
+              if (result.length > 0) {
+                // Login successful
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ message: 'Login successful' }));
+              } else {
+                // Login failed
+                res.statusCode = 401;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ error: 'Invalid username or password' }));
+              }
+            }
+          });
+        });
     } else if (req.method === 'POST' && req.url === '/add-task') {
       // Handle adding a new task
       let body = '';
