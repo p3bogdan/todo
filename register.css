@@ -75,4 +75,34 @@ body {
     color: #00cc00;
   }
   
-  
+    /* Menu Styles */
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  background-color: #36d053;
+  border-radius: 4px;
+}
+
+.menu li {
+  margin-right: 10px;
+}
+
+.menu li:last-child {
+  margin-right: 0;
+}
+
+.menu a {
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  background-color: #4CAF50;
+  transition: background-color 0.3s ease;
+}

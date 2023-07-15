@@ -7,6 +7,10 @@
 </head>
 <body>
   <h1>Login</h1>
+  <title>Menu</title>
+  <ul class="menu">
+    <li><a href="register.html">Register</a></li>
+  </ul>
   <div class="container">
     <form id="loginForm">
       <label for="username">Username</label>
@@ -43,7 +47,7 @@
         messageContainer.textContent = data.message;
         messageContainer.classList.add('success');
         // Redirect to the desired page
-        // window.location.href = 'dashboard.html';
+        window.location.href = 'todo.html';
       } else {
         // Login failed
         messageContainer.textContent = data.error;
