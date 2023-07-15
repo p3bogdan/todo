@@ -4,8 +4,8 @@ const cors = require('cors');
 
 const pool = mysql.createPool({
   host: 'localhost',
-  user: 'root',
-  password: 'generate212312jSAdlkajSA2@d',
+  user: 'bogdan',
+  password: 'pasdDFGsmys@qlFor2323NC£@!i2D',
   port: 3306,
   connectionLimit: 10,
   database: 'database_todo_1',
