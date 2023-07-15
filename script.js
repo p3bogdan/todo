@@ -32,7 +32,7 @@ taskList.addEventListener('click', (event) => {
 
 // Fetch and display tasks from the server
 function fetchTasksFromServer() {
-  fetch('http://localhost:3000/get-tasks')
+  fetch('http://46.101.85.181:3000/get-tasks')
     .then(response => response.json())
     .then(data => {
       data.forEach(task => {
@@ -46,7 +46,7 @@ function fetchTasksFromServer() {
 
 // Add task to the server
 function addTaskToServer(task) {
-  fetch('http://localhost:3000/add-task', {
+  fetch('http://46.101.85.181:3000/add-task', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ function addTaskToServer(task) {
 
 // Delete task from the server
 function deleteTaskFromServer(task) {
-  fetch('http://localhost:3000/delete-task', {
+  fetch('http://46.101.85.181:3000/delete-task', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
